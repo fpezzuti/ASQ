@@ -1,0 +1,9 @@
+datasets
+pandas
+tqdm
+transformers
+accelerate
+pyterrier
+pyterrier-alpha
+pyterrier-dr
+huggingface_hub
