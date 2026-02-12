@@ -1,0 +1,6 @@
+name: "answers"
+extensions: [".tsv", ".csv", ".json", ".jsonl", ".txt"]
+required_columns: ["qid", "answer"]
+dtypes: 
+  qid: "str"
+  answer: "str"

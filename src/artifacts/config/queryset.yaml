@@ -1,0 +1,6 @@
+name: "queryset"
+extensions: [".tsv", ".csv", ".json"]
+required_columns: ["qid", "query"]
+dtypes: 
+  qid: "str"
+  query: "str"

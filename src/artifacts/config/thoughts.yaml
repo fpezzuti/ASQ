@@ -1,0 +1,7 @@
+name: "thoughts"
+extensions: [".tsv", ".csv"]
+required_columns: ["qid", "iteration", "thought"]
+dtypes:
+  qid: "str"
+  iteration: "int"
+  thought: "str"

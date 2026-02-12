@@ -1,0 +1,12 @@
+*.csv
+*.tsv
+*.json
+*.parquet
+*.log
+*.pdf
+__pycache__/
+*.pyc
+.env
+venv/
+data/
+.DS_Store

@@ -1,0 +1,7 @@
+name: "iter_queries"
+extensions: [".tsv", ".csv"]
+required_columns: ["qid", "iteration", "llm_query"]
+dtypes: 
+  qid: "str"
+  iteration: "int"
+  llm_query: "str"

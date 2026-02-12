@@ -1,0 +1,8 @@
+name: "retrieved_docs"
+extensions: [".tsv", ".csv"]
+required_columns: ["qid", "iteration", "docid", "rank"]
+dtypes:
+  qid: "str"
+  iteration: "int"
+  docid: "str"
+  rank: "int"
