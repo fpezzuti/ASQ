@@ -20,11 +20,12 @@ ASQ/
 ├── README.md
 ├── requirements.txt
 ├── setup.sh
-└── src/ # 👈 main development root
-    ├── quickstart_trace_generation.ipynb   # trace generation walkthrough
-    ├── quickstart_data_access.ipynb        # artifact loading/analysis walkthrough
+├── notebooks/
+│   ├── quickstart_trace_generation.ipynb   # trace generation walkthrough
+│   └── quickstart_data_access.ipynb        # artifact loading & analysis walkthrough
+└── src/                                    # 👈 main development root
     ├── artifacts/                          # artifact schemas and loaders
-    ├── data_utils/                         # dataset/retrieval helpers
+    ├── data_utils/                         # dataset and retrieval helpers
     └── trace_generation/                   # agent setup, execution, extraction
 ```
 
@@ -45,12 +46,12 @@ pip install -r requirements.txt
 
 Use these notebooks to get started quickly with trace generation and artifact loading and analysis.
 
-- `src/quickstart_trace_generation.ipynb`: Generate traces.
-- `src/quickstart_data_access.ipynb`: Load trace artifacts and run basic analytics.
+- `notebooks/quickstart_trace_generation.ipynb`: Generate traces.
+- `notebooks/quickstart_data_access.ipynb`: Load trace artifacts and run basic analytics.
 
 
 ## 🏗️ Generating your ASQ-like dataset
-We now describe how to **construct an ASQ-like dataset**. For a practical walkthrough, see `src/quickstart_trace_generation.ipynb`.
+We now describe how to **construct an ASQ-like dataset**. For a practical walkthrough, see `notebooks/quickstart_trace_generation.ipynb`.
 
 To **reproduce the construction of ASQ**, use the `tutorial_main.py` as shown in the aforementioned walkthrough about trace generation.
 
@@ -85,7 +86,7 @@ Use either an existing `pyterrier.Transformer` retrieval pipeline, or create you
 2. Returns rows with `qid`, `docno`, `rank`, `score`, and `text`.
 3. Returns `title` when available.
 
-See `src/quickstart_trace_generation.ipynb` for some practical examples.
+See `notebooks/quickstart_trace_generation.ipynb` for some practical examples.
 
 ### 2. Preparing the source organic queryset
 The next step is to prepare the input query set.
@@ -95,7 +96,7 @@ The next step is to prepare the input query set.
 - If it is a custom dataset:
 	- build a queries DataFrame with `qid` and `query` columns.
 
-See `src/quickstart_trace_generation.ipynb` for some practical examples.
+See `notebooks/quickstart_trace_generation.ipynb` for some practical examples.
 
 ### 3. Collecting Traces (Execution of the Agentic Run)
 
@@ -141,7 +142,7 @@ Directory `traces/{dataset}/{retriever_config}/{agent_family}/{model}/` stores c
 
 To simplify path resolution and loading, use the `artifacts.TraceCollectionConfig` and `OutputPaths` classes, and the `config.build_output_paths()` methods.
 
-See `src/quickstart_data_access.ipynb` for a step-by-step example on how to use them.
+See `notebooks/quickstart_data_access.ipynb` for a step-by-step example on how to use them.
 
 ### Loading Full Trace Collections
 
