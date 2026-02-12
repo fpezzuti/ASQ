@@ -16,7 +16,7 @@ This repository contains the tools to reconstruct the dataset, access the traces
 This repository provides a modular framework for generating, storing, and analszing agentic search traces.
 Below is the organizational structure of the source code:
 ```text
-asq/
+ASQ/
 ├── README.md
 ├── requirements.txt
 ├── setup.sh
