@@ -6,7 +6,7 @@
 <div align="center">
   
 [![HF Dataset](https://img.shields.io/badge/Dataset-AgenticSearchQueryset%2FASQ-FF9D00)](https://huggingface.co/datasets/AgenticSearchQueryset/ASQ)
-[![Paper](https://img.shields.io/badge/arXiv-2602.XXXXX-B31B1B.svg)](https://arxiv.org/)
+[![Paper](https://img.shields.io/badge/arXiv-2602.XXXXX-B31B1B.svg)](https://arxiv.org/abs/2602.17518)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
 
@@ -235,9 +235,9 @@ If you find our work useful, please cite it as follows:
       title={A Picture of Agentic Search}, 
       author={Pezzuti, Francesca and Frieder, Ophir and Silvestri, Fabrizio and MacAvaney, Sean and Tonellotto, Nicola},
       year={2026},
-      eprint={},
+      eprint={2602.17518},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={}, 
+      url={https://arxiv.org/abs/2602.17518}, 
 }
 ```
