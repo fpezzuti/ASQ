@@ -74,8 +74,11 @@ In the following, we describe how to set the agent family, the generator and the
 
 ### 1.1 Setting up the generator
 At the moment we support the following configurations:
-- `model_type`: agent family (`search_r1` or `autorefine`).
+- `model_type`: agent family (`search_r1`, `autorefine`, or `gpt_oss`).
 - `model_id`: generator checkpoint to use (see supported lists below).
+
+The `gpt_oss` backend uses the Terrier OpenAI-compatible API and requires either
+`OPENAI_API_KEY` or `TERRIER_API_KEY` to be configured in the environment.
 
 The list of supported `model_type` agent families and of their `model_id` supported models can be seen using the `trace_generation.help_supported_agents()` and `trace_generation.help_supported_generators()` functions. 
 
@@ -208,6 +211,7 @@ At the moment we support the following models:
 | :--- | :--- | :--- |
 | `search_r1` | [Qwen-3B](https://huggingface.co/PeterJinGo/SearchR1-nq_hotpotqa_train-qwen2.5-3b-em-ppo-v0.3), [Qwen-7B](https://huggingface.co/PeterJinGo/SearchR1-nq_hotpotqa_train-qwen2.5-7b-em-ppo), [Qwen-14B](https://huggingface.co/PeterJinGo/SearchR1-nq_hotpotqa_train-qwen2.5-14b-it-em-ppo-v0.2)  | [original paper](https://arxiv.org/abs/2503.09516) |
 | `autorefine` | [Qwen-3B](https://huggingface.co/yrshi/AutoRefine-Qwen2.5-3B-Instruct) | [original paper](https://arxiv.org/abs/2505.11277) |
+| `gpt_oss` | `gpt-oss-20b`, `gpt-oss-120b` | Served through the Terrier OpenAI-compatible API |
 
 
 To add a **new agent type**, follow these steps:
@@ -231,13 +235,16 @@ Users are advised to apply safety and content filters when using them.
 If you find our work useful, please cite it as follows:
 
 ```bibtex
-@misc{fpezzuti2026asq,
-      title={A Picture of Agentic Search}, 
-      author={Pezzuti, Francesca and Frieder, Ophir and Silvestri, Fabrizio and MacAvaney, Sean and Tonellotto, Nicola},
-      year={2026},
-      eprint={2602.17518},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2602.17518}, 
+@article{fpezzuti2026asq,
+    author={Pezzuti, Francesca and Frieder, Ophir and Silvestri, Fabrizio and MacAvaney, Sean and Tonellotto, Nicola},
+    journal = {PLOS ONE},
+    publisher = {Public Library of Science},
+    title = {{How AI agents search}},
+    year = {2026},
+    month = {10},
+    volume = {21},
+    url = {https://doi.org/10.1371/journal.pone.0360157},
+    pages = {1--21},
+    number = {10},
 }
 ```

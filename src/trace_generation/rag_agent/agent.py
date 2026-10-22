@@ -6,22 +6,26 @@ import pyterrier as pt
 
 def _default_model_registry() -> Dict[str, Dict[str, str]]:
     from trace_generation.rag_agent.autorefine import SUPPORTED_MODELS as AUTOREFINE_MODELS
+    from trace_generation.rag_agent.gpt_oss import SUPPORTED_MODELS as GPT_OSS_MODELS
     from trace_generation.rag_agent.search_r1 import SUPPORTED_MODELS as SEARCH_R1_MODELS
 
     return {
         "search_r1": SEARCH_R1_MODELS,
         "autorefine": AUTOREFINE_MODELS,
+        "gpt_oss": GPT_OSS_MODELS,
         # add here new supported generators
     }
 
 
 def _default_builders() -> Dict[str, Callable]:
     from trace_generation.rag_agent.autorefine.builder import build_autorefine
+    from trace_generation.rag_agent.gpt_oss.builder import build_gpt_oss
     from trace_generation.rag_agent.search_r1.builder import build_search_r1
 
     return {
         "search_r1": build_search_r1,
         "autorefine": build_autorefine,
+        "gpt_oss": build_gpt_oss,
         # add here the builder of new supported agents
     }
 
@@ -87,6 +91,8 @@ class RagAgentBuilder:
     model_id: str
     retrieval_pipeline: pt.Transformer
     agent_k: int
+    retriever_batch_size: int = 1
+    retriever_batch_wait_ms: int = 25
     _agent: object = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
@@ -94,7 +100,17 @@ class RagAgentBuilder:
         if builder is None:
             raise ValueError(f"Unsupported model_type '{self.model_type}'. Supported: {list(BUILDER_REGISTRY.keys())}")
         model = self.resolve_model()
-        instance = builder(retrieval_pipeline=self.retrieval_pipeline, agent_k=self.agent_k, model_id=model)
+        builder_kwargs = {
+            "retrieval_pipeline": self.retrieval_pipeline,
+            "agent_k": self.agent_k,
+            "model_id": model,
+        }
+        if self.model_type == "gpt_oss":
+            builder_kwargs.update(
+                retriever_batch_size=self.retriever_batch_size,
+                retriever_batch_wait_ms=self.retriever_batch_wait_ms,
+            )
+        instance = builder(**builder_kwargs)
         object.__setattr__(self, "_agent", instance)
 
     def _get_registry(self) -> Dict[str, str]:
@@ -112,7 +128,14 @@ class RagAgentBuilder:
     def agent(self):
         return self._agent
 
-def build_agent(model_type: str, model_id: str, retrieval_pipeline, agent_k: int):
+def build_agent(
+    model_type: str,
+    model_id: str,
+    retrieval_pipeline,
+    agent_k: int,
+    retriever_batch_size: int = 1,
+    retriever_batch_wait_ms: int = 25,
+):
     """
     Returns an agent of type <model_type> with generator <model_id>, using the
     top <agent_k> results retrieved using the <retrieval_pipeline> retrieval pipeline.
@@ -122,6 +145,8 @@ def build_agent(model_type: str, model_id: str, retrieval_pipeline, agent_k: int
         model_id=model_id,
         retrieval_pipeline=retrieval_pipeline,
         agent_k=agent_k,
+        retriever_batch_size=retriever_batch_size,
+        retriever_batch_wait_ms=retriever_batch_wait_ms,
     )
     return agent.agent
 

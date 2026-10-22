@@ -65,11 +65,14 @@ def batch_processing(
     return total_queries_processed
 
 def build_arg_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Generate SearchR1 answers for queries.")
+    parser = argparse.ArgumentParser(description="Generate agent traces for queries.")
     parser.add_argument("--dataset", type=str, required=True, help=f"Dataset to process. E.g., hotpot-qa, msmarco-dev, researchy-test, researchy-train.")
-    parser.add_argument("--search_r1_k", type=int, default=3, help="Number of top documents to retrieve with SearchR1.")
-    parser.add_argument("--model_type", type=str, default="search_r1", choices=SUPPORTED_MODEL_TYPES, help="Model backend (e.g., search_r1).")
-    parser.add_argument("--model_id", type=str, default="Qwen-7B", help="Model key to use for SearchR1.")
+    parser.add_argument("--agent_k", type=int, default=3, help="Number of top documents to expose to the agent per search step.")
+    parser.add_argument("--model_type", type=str, default="search_r1", choices=SUPPORTED_MODEL_TYPES, help="Model backend (e.g., search_r1 or gpt_oss).")
+    parser.add_argument("--model_id", type=str, default="Qwen-7B", help="Model key for the selected agent backend.")
+    parser.add_argument("--retriever_batch_size", type=int, default=1, help="GPT-OSS retriever micro-batch size.")
+    parser.add_argument("--retriever_batch_wait_ms", type=int, default=25, help="GPT-OSS retriever micro-batch wait time in milliseconds.")
+    parser.add_argument("--agent_concurrency", type=int, default=1, help="Number of queries processed concurrently by the agent.")
     parser.add_argument("--wmodel", type=str, default="BM25", help="Base retrieval model (e.g., BM25, DPH, PL2).")
     parser.add_argument("--retriever_k", type=int, default=1000, help="Number of candidates retrieved by the base retriever.")
     parser.add_argument("--reranker_k", type=int, default=100, help="Number of candidates kept by the reranker.")
@@ -108,7 +111,7 @@ def main():
     )
     
 
-    logger.info(f"Initialising {args.model_type} (will use top {args.search_r1_k} documents).")
+    logger.info(f"Initialising {args.model_type} (will use top {args.agent_k} documents).")
     agent = build_agent(args, pipeline)
     logger.info(f"Starting search for {len(df_queries)} queries.")
 
@@ -129,7 +132,7 @@ def main():
         agent=agent,
         dataframe_extractor=dataframe_extractor,
         max_queries=args.max_queries,
-        batch_size=BATCH_SIZE,
+        batch_size=max(1, args.agent_concurrency),
         output_fpaths=output_paths,
         logger=logger,
     )

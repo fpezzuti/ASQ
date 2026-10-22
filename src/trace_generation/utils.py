@@ -75,8 +75,8 @@ def process_queries_batch(queries_df: pd.DataFrame, agent, dataframe_extractor: 
         raise RuntimeError(f"Error during agent execution: {e}. Queries: {queries_df}")
     try:
         dataframe_extractor.extract_all_and_save(res, output_paths, verbose=verbose)
-    except e:
-        pass
+    except Exception as e:
+        print(f"Error during extraction and saving: {e}. Search results DataFrame: {res}")
 
 
 def load_queries(args) -> pd.DataFrame:
@@ -92,6 +92,12 @@ def build_agent(args, pipeline):
     Given args and a pyterrier retrieval pipeline, builds an agent.
     """
     from .rag_agent import build_agent
-    agent = build_agent(model_type=args.model_type, model_id=args.model_id, retrieval_pipeline=pipeline, agent_k=args.search_r1_k)
+    agent = build_agent(
+        model_type=args.model_type,
+        model_id=args.model_id,
+        retrieval_pipeline=pipeline,
+        agent_k=args.agent_k,
+        retriever_batch_size=getattr(args, "retriever_batch_size", 1),
+        retriever_batch_wait_ms=getattr(args, "retriever_batch_wait_ms", 25),
+    )
     return agent
-

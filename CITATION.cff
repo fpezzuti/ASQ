@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the article below."
+title: "ASQ: Agentic Search Queryset"
+type: software
+authors:
+  - family-names: Pezzuti
+    given-names: Francesca
+  - family-names: Frieder
+    given-names: Ophir
+  - family-names: Silvestri
+    given-names: Fabrizio
+  - family-names: MacAvaney
+    given-names: Sean
+  - family-names: Tonellotto
+    given-names: Nicola
+repository-code: "https://github.com/fpezzuti/ASQ"
+license: MIT
+preferred-citation:
+  type: article
+  title: "How AI agents search"
+  authors:
+    - family-names: Pezzuti
+      given-names: Francesca
+    - family-names: Frieder
+      given-names: Ophir
+    - family-names: Silvestri
+      given-names: Fabrizio
+    - family-names: MacAvaney
+      given-names: Sean
+    - family-names: Tonellotto
+      given-names: Nicola
+  journal: "PLOS ONE"
+  publisher:
+    name: "Public Library of Science"
+  year: 2026
+  month: 10
+  volume: 21
+  issue: 10
+  start: 1
+  end: 21
+  doi: "10.1371/journal.pone.0360157"
+  url: "https://doi.org/10.1371/journal.pone.0360157"

@@ -7,3 +7,4 @@ pyterrier
 pyterrier-alpha
 pyterrier-dr
 huggingface_hub
+openai
