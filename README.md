@@ -4,9 +4,10 @@
 </div>
 
 <div align="center">
-  
+	
+[![Paper](https://img.shields.io/badge/Paper-PONE-0080A1.svg)](https://doi.org/10.1371/journal.pone.0360157)
 [![HF Dataset](https://img.shields.io/badge/Dataset-AgenticSearchQueryset%2FASQ-FF9D00)](https://huggingface.co/datasets/AgenticSearchQueryset/ASQ)
-[![Paper](https://img.shields.io/badge/arXiv-2602.17518-B31B1B.svg)](https://arxiv.org/abs/2602.17518)
+[![Preprint](https://img.shields.io/badge/arXiv-2602.17518-B31B1B.svg)](https://arxiv.org/abs/2602.17518)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
 
